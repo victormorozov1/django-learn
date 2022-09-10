@@ -4,5 +4,5 @@ from users.views import main_page
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('users.urls')),
+    path('users', include('users.urls')),
 ]

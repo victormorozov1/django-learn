@@ -3,4 +3,4 @@ from django.http import HttpResponse
 
 
 def main_page(request):
-    return HttpResponse("Main page og users App.")
+    return render(request, 'users/main_page.html')
