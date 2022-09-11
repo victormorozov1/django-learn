@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from users.models import User
 
@@ -9,4 +9,4 @@ def main_page(request):
 
 def user_page(request, user_id):
     print('USER OAGE GETTED')
-    return render(request, 'users/user_page.html', {'user': User.objects.get(id=user_id)})
+    return render(request, 'users/user_page.html', {'user': get_object_or_404(User, pk=user_id)})
