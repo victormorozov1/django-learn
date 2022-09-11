@@ -1,13 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div style="position: relative; width: 40%; left: 30%">
-        <form action="{% url 'register_page' %}" method="post">
-            {% csrf_token %}
+    <form action="{% url 'register_page' %}" method="post">
+        {% csrf_token %}
 
-            {{ form.as_p }}
+        {{ form.as_p }}
 
-            <input type="submit" value="Submit" class="btn btn-primary">
-        </form>
-    </div>
+        <input type="submit" value="Submit" class="btn btn-primary">
+    </form>
 {% endblock %}

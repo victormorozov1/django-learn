@@ -7,7 +7,10 @@
 </head>
 <body>
 {% include "inc/_navbar.html" %}
-{%  block content %}{% endblock %}
+
+<div style="position: relative; width: 40%; left: 30%">
+    {% block content %}{% endblock %}
+</div>
 
 </body>
 </html>
