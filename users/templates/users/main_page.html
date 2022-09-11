@@ -5,7 +5,8 @@
     {% get_all_users as users %}
 
     {% for user in users %}
-        <p>{{ user.name }}</p>
+        <a href="{{ user.get_absolute_url }}">{{ user.name }}</a>
+
     {% endfor %}
 
 {% endblock %}

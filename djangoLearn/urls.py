@@ -6,5 +6,5 @@ from django.http import HttpResponse
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', lambda request: HttpResponse('Home page'), name='home'),
-    path('users', include('users.urls')),
+    path('users/', include('users.urls')),
 ]
