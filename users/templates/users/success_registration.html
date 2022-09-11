@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="alert alert-success" role="alert">
+  Registration successful!
+</div>
+    <a href="{% url 'register_page' %}">Register another user</a>
+    <a href="{% url 'home' %}">Home</a>
+{% endblock %}
