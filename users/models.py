@@ -11,7 +11,7 @@ class User(models.Model):
     hashed_password = models.IntegerField()
 
     def get_absolute_url(self):
-        return reverse('user_page', kwargs={'user_id': self.pk})
+        return reverse('user_page', kwargs={'pk': self.pk})
 
     def __str__(self):
         return f'User {self.name}'

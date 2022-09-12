@@ -6,10 +6,7 @@ from .hash import hash
 from django.forms.utils import ErrorList
 from django import forms
 from django.core.exceptions import ValidationError
-from django.views.generic import ListView
-
-# def main_page(request):
-#     return render(request, 'users/main_page.html')
+from django.views.generic import ListView, DetailView
 
 
 class AllUsers(ListView):
@@ -18,9 +15,10 @@ class AllUsers(ListView):
     context_object_name = 'users'
 
 
-def user_page(request, user_id):
-    print('USER OAGE GETTED')
-    return render(request, 'users/user_page.html', {'user': get_object_or_404(User, pk=user_id)})
+class OneUser(DetailView):
+    model = User
+    template_name = 'users/user_page.html'
+    context_object_name = 'user'
 
 
 def register_page(request):
