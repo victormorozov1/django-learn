@@ -6,10 +6,16 @@ from .hash import hash
 from django.forms.utils import ErrorList
 from django import forms
 from django.core.exceptions import ValidationError
+from django.views.generic import ListView
+
+# def main_page(request):
+#     return render(request, 'users/main_page.html')
 
 
-def main_page(request):
-    return render(request, 'users/main_page.html')
+class AllUsers(ListView):
+    model = User
+    template_name = 'users/main_page.html'
+    context_object_name = 'users'
 
 
 def user_page(request, user_id):
