@@ -3,6 +3,9 @@ from django.http import HttpResponse
 from .models import User
 from .forms import RegisterForm
 from .hash import hash
+from django.forms.utils import ErrorList
+from django import forms
+from django.core.exceptions import ValidationError
 
 
 def main_page(request):
@@ -27,5 +30,9 @@ def register_page(request):
                 return render(request, 'users/success_registration.html')
             else:
                 print('Different passwords')
+                raise ValidationError(
+                    "Did not send for 'help' in the subject despite "
+                    "CC'ing yourself."
+                )
     return render(request, 'users/register.html', {'form': register_form})
 
