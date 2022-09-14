@@ -4,9 +4,12 @@
 
     {% get_all_users as users %}
 
-    {% for user in users %}
-        <a href="{{ user.get_absolute_url }}">{{ user.name }}</a>
-
+    {% for user in page_obj.object_list %}
+        <div style="width: 100%; padding: 20px; background-color: darkgray; text-align: center; border-radius: 5px;
+        font-size: 30px">
+            <a style="color: #555" href="{{ user.get_absolute_url }}">{{ user.name }}</a>
+        </div>
+        <br>
     {% endfor %}
 
 {% endblock %}

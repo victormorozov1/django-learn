@@ -13,6 +13,7 @@ class AllUsers(ListView):
     model = User
     template_name = 'users/main_page.html'
     context_object_name = 'users'
+    paginate_by = 4
 
 
 class OneUser(DetailView):
