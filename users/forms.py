@@ -30,8 +30,8 @@ class EnterForm(forms.Form):
 
     def clean(self):
         form_data = self.cleaned_data
-        user = User.objects.get(name=form_data['name'])
-        if hash(form_data['password']) != user.hashed_password:
-            print(
-                f'pass {form_data["password"]}, hash_pass {hash(form_data["password"])}, us_h_p {user.hashed_password}')
-            self._errors["password"] = ["Wrong password"]
+        users = User.objects.filter(name=form_data['name'])
+        if len(users) > 1:
+            print(f'ERROR: found {len(users)} users with name {form_data["name"]}')
+        if len(users) == 0 or hash(form_data['password']) != users[0].hashed_password:
+            self._errors["password"] = ["Wrong username or password"]
