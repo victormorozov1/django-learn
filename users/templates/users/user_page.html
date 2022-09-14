@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-{{ user.name }}
+    {% with username=user.name %}
+        {% include 'inc/_user_card.html' %}
+    {% endwith %}
 {% endblock %}
