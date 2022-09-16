@@ -3,7 +3,7 @@ def hash(s):
     h = 0
     for i in s:
         h = (h * st % m + ord(i)) % m
-    return h
+    return str(h)
 
 
 if __name__ == '__main__':

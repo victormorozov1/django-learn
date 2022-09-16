@@ -1,4 +1,4 @@
 <div style="width: 100%; padding: 20px; background-color: darkgray; text-align: center; border-radius: 5px;
         font-size: 30px">
-    <a style="color: #555" href="{{ user.get_absolute_url }}">{{ username }}</a>
+    <a style="color: #555" href="{% url 'user_page' user.pk %}">{{ user.username }}</a>
 </div>
