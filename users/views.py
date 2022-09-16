@@ -5,7 +5,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.models import User
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
 import django.contrib.auth.hashers
 
 from .models import Profile
@@ -53,3 +53,8 @@ def login_page(request):
             login(request, user)
 
     return render(request, 'users/enter.html', {'form': enter_form})
+
+
+def logout_page(request):
+    logout(request)
+    return redirect('home')
