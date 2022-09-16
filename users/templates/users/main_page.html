@@ -5,9 +5,7 @@
     {% get_all_users as users %}
 
     {% for user in page_obj.object_list %}
-        {% with username=user.username %}
-            {% include "inc/_user_card.html" %}
-        {% endwith %}
+        {% include "inc/_user_card.html" %}
         <br>
     {% endfor %}
 
