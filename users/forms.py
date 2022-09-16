@@ -9,11 +9,6 @@ from .hash import hash
 style = forms.TextInput(attrs={'class': 'form-control'})
 
 
-class LoginForm(AuthenticationForm):
-    username = forms.CharField(max_length=120, widget=style)
-    password = forms.CharField(max_length=120, widget=style)
-
-
 class RegisterForm(forms.Form):
     name = forms.CharField(max_length=120, widget=style)
     password = forms.CharField(max_length=120, widget=style)

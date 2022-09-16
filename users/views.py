@@ -9,11 +9,8 @@ from django.contrib.auth import login
 import django.contrib.auth.hashers
 
 from .models import Profile
-from .forms import RegisterForm, LoginForm, EnterForm
+from .forms import RegisterForm, EnterForm
 from .hash import hash
-
-
-HASH_FUNC = hash
 
 
 class AllUsers(ListView):
@@ -35,7 +32,7 @@ def register_page(request):
     else:
         register_form = RegisterForm(request.POST)
         if register_form.is_valid():
-            pass1_hash, pass2_hash = HASH_FUNC(register_form.cleaned_data['password']), HASH_FUNC(
+            pass1_hash, pass2_hash = hash(register_form.cleaned_data['password']), hash(
                 register_form.cleaned_data['repeat_password'])  # make_password каждый раз делает разные пароли
 
             user = User.objects.create(username=register_form.cleaned_data['name'], password=pass1_hash)
@@ -45,29 +42,11 @@ def register_page(request):
     return render(request, 'users/register.html', {'form': register_form})
 
 
-# def login_page(request):
-#     if request.method == 'POST':
-#         form = LoginForm(request.POST)
-#         if form.is_valid():
-#             user = form.get_user()
-#             login(request, user)
-#             return redirect('users')
-#         else:
-#             print('wrong')
-#
-#     else:
-#         form = LoginForm()
-#     return render(request, 'users/enter.html', {'form': form})
-
 def login_page(request):
     if request.method == 'GET':
         enter_form = EnterForm()
     else:
         enter_form = EnterForm(request.POST)
-        # print(enter_form.cleaned_data['password'])
-
-        # print(hash(enter_form.cleaned_data['password']))
-        # print(user.hashed_password)
         if enter_form.is_valid():
             user = User.objects.get(username=enter_form.cleaned_data['name'])
             print('SUCCESS ENTER')
