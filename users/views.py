@@ -7,6 +7,7 @@ from django.views.generic import ListView, DetailView
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout
 import django.contrib.auth.hashers
+from django.urls import reverse
 
 from .models import Profile
 from .forms import RegisterForm, EnterForm
@@ -51,6 +52,8 @@ def login_page(request):
             user = User.objects.get(username=enter_form.cleaned_data['name'])
             print('SUCCESS ENTER')
             login(request, user)
+            # print(reverse('users', kwargs={'pk': 1}))
+            return redirect(reverse('user_page', kwargs={'pk': user.pk}))
 
     return render(request, 'users/enter.html', {'form': enter_form})
 
