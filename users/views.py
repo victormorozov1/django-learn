@@ -1,12 +1,14 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
-from .models import User
-from .forms import RegisterForm, EnterForm
-from .hash import hash
 from django.forms.utils import ErrorList
 from django import forms
 from django.core.exceptions import ValidationError
 from django.views.generic import ListView, DetailView
+from django.contrib.auth.models import User
+
+from .models import Profile
+from .forms import RegisterForm, EnterForm
+from .hash import hash
 
 
 class AllUsers(ListView):
@@ -31,7 +33,8 @@ def register_page(request):
             pass1_hash, pass2_hash = hash(register_form.cleaned_data['password']), hash(
                 register_form.cleaned_data['repeat_password'])
 
-            User.objects.create(name=register_form.cleaned_data['name'], hashed_password=pass1_hash)
+            user = User.objects.create(username=register_form.cleaned_data['name'], password=pass1_hash)
+            Profile.objects.create(about='-', hobby='-', user=user)
             return render(request, 'users/success_registration.html')
 
     return render(request, 'users/register.html', {'form': register_form})

@@ -19,7 +19,7 @@ class RegisterForm(forms.Form):
         return form_data
 
     def clean_name(self):
-        if len(User.objects.filter(name=self.cleaned_data['name'])) >= 1:
+        if len(User.objects.filter(username=self.cleaned_data['name'])) >= 1:
             self._errors["name"] = ["This name is already occupied"]
         return self.cleaned_data['name']
 
