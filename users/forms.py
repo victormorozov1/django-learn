@@ -7,9 +7,9 @@ style = forms.TextInput(attrs={'class': 'form-control'})
 
 
 class RegisterForm(forms.Form):
-    name = forms.CharField(max_length=User.max_name_len, widget=style)
-    password = forms.CharField(max_length=User.max_password_len, widget=style)
-    repeat_password = forms.CharField(max_length=User.max_password_len, widget=style)
+    name = forms.CharField(max_length=120, widget=style)
+    password = forms.CharField(max_length=120, widget=style)
+    repeat_password = forms.CharField(max_length=120, widget=style)
 
     def clean(self):
         form_data = self.cleaned_data
@@ -25,8 +25,8 @@ class RegisterForm(forms.Form):
 
 
 class EnterForm(forms.Form):
-    name = forms.CharField(max_length=User.max_name_len, widget=style)
-    password = forms.CharField(max_length=User.max_password_len, widget=style)
+    name = forms.CharField(max_length=120, widget=style)
+    password = forms.CharField(max_length=120, widget=style)
 
     def clean(self):
         form_data = self.cleaned_data
