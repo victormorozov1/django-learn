@@ -1,7 +1,8 @@
 <div class="card" style="width: 100%; margin: 5px">
-  <div class="card-body">
-    <h5 class="card-title">{{ task.title }}</h5>
-    <p class="card-text">{{ task.description|truncatewords:50 }}</p>
-    <a href="{% url 'task' task.pk %}" class="btn btn-primary">Read more</a>
-  </div>
+    {{ card_type }}
+    <div class="card-body">
+        <h5 class="card-title">{{ task.title }}</h5>
+        <p class="card-text">{% block description %}{{ task.description }}{% endblock %}</p>
+        {% block read_more_button %}{% endblock %}
+    </div>
 </div>
