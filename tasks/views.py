@@ -14,3 +14,9 @@ class TasksList(ListView):
     template_name = 'tasks/task_list.html'
     context_object_name = 'tasks_list'
     paginate_by = 5
+
+
+class Task(DetailView):
+    model = Task
+    template_name = 'tasks/task.html'
+    context_object_name = 'task'
