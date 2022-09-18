@@ -27,6 +27,8 @@ class OneUser(DetailView):
     context_object_name = 'user'
 
 
+# action_url в register_page и login_page передается потому,
+# что невозможно использовать функцию url в шаблоне в нужном месте
 def register_page(request):
     if request.method == 'GET':
         register_form = RegisterForm()
@@ -40,7 +42,7 @@ def register_page(request):
             Profile.objects.create(about='-', hobby='-', user=user)
             return render(request, 'users/success_registration.html')
 
-    return render(request, 'users/register.html', {'form': register_form})
+    return render(request, 'users/register.html', {'form': register_form, 'action_url': reverse('register_page')})
 
 
 def login_page(request):
@@ -55,7 +57,7 @@ def login_page(request):
             # print(reverse('users', kwargs={'pk': 1}))
             return redirect(reverse('user_page', kwargs={'pk': user.pk}))
 
-    return render(request, 'users/enter.html', {'form': enter_form})
+    return render(request, 'users/enter.html', {'form': enter_form, 'action_url': reverse('login_page')})
 
 
 def logout_page(request):

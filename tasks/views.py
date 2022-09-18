@@ -12,7 +12,7 @@ def index(request):
     return HttpResponse('Main page or tasks app')
 
 
-def _create_task(request, Form, template_dir, get_detail_answer=False, get_reference_short_answer=False):
+def _create_task(request, Form, template_dir, action_url, get_detail_answer=False, get_reference_short_answer=False):
     if request.method == 'POST':
         form = Form(request.POST)
         task = Task.objects.create(
@@ -24,17 +24,17 @@ def _create_task(request, Form, template_dir, get_detail_answer=False, get_refer
         return redirect(reverse('task', task.pk))
     else:
         form = Form()
-        return render(request, template_dir, {'form': form})
+        return render(request, template_dir, {'form': form, 'action_url': action_url})
 
 
 def create_detail_task(request):
     return _create_task(request, CreateTaskWithDetailedAnswerForm, 'tasks/create_detail_task.html',
-                        get_detail_answer=True)
+                        reverse('create_detail_task'), get_detail_answer=True)
 
 
 def create_short_task(request):
     return _create_task(request, CreateTaskWithDetailedAnswerForm, 'tasks/create_short_task.html',
-                        get_reference_short_answer=True)
+                        reverse('create_short_task'), get_reference_short_answer=True)
 
 
 class TasksList(ListView):

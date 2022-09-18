@@ -6,7 +6,7 @@ from .models import User
 from .hash import hash
 
 
-style = forms.TextInput(attrs={'class': 'form-control'})
+style = forms.TextInput(attrs={'class': 'form-control'})  # Эта штука дублируется в разных приложениях
 
 
 class RegisterForm(forms.Form):

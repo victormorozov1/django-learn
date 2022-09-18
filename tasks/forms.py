@@ -3,6 +3,9 @@ from django.forms import ModelForm
 from .models import Task
 
 
+# style = forms.TextInput(attrs={'class': 'form-control'})
+
+
 class CreateTaskWithShortAnswerForm(ModelForm):
     class Meta:
         model = Task
