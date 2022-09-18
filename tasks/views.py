@@ -22,9 +22,6 @@ def _create_task(request, Form, template_dir, action_url, get_reference_short_an
                 reference_short_answer=form.cleaned_data['reference_short_answer'] if get_reference_short_answer else '',
                 user=request.user
             )
-            task.save()
-            for i in range(100):
-                print(reverse('task', kwargs={'pk': task.pk}))
 
             return redirect(reverse('task', kwargs={'pk': task.pk}))
     else:
