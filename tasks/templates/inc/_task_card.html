@@ -1,18 +1,8 @@
-{#<div class="card" style="width: 100%; margin: 5px">#}
-{#    <div class="card-body">#}
-{#        <h5 class="card-title">{{ task.title }}</h5>#}
-{#        <p class="card-text">{% block description %}{{ task.description }}{% endblock %}</p>#}
-{#        {% block read_more_button %}{% endblock %}#}
-{#    </div>#}
-{#    <p>{{ task.user.username }}</p>#}
-{#</div>#}
-
 <div class="card" style="width: 100%; margin: 5px;">
     <div class="card-body">
         <h5 class="card-title">{{ task.title }}</h5>
         <p class="card-text">{% block description %}{{ task.description }}{% endblock %}</p>
         {% block read_more_button %}{% endblock %}
-        <a href="#" class="card-link">{{ task.user.username }}</a>
-{#        <a href="#" class="card-link">Another link</a>#}
+        <a href="{% url 'user_page' task.user.pk %}" class="card-link">{{ task.user.username }}</a>
     </div>
 </div>
