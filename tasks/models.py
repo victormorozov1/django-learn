@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 
 class Task(models.Model):
-    title = models.CharField(max_length=120, default='Task')
+    title = models.CharField(max_length=120)
     description = models.TextField()
     likes = models.IntegerField(default=0)
     detail_answer = models.BooleanField(default=True, null=True)  # detailed_answer or short_answer
