@@ -13,6 +13,8 @@ def index(request):
 
 
 def answer_page(request, pk):
+    if not request.user.is_authenticated:
+        return redirect(reverse('login_page'))
     if request.method == 'POST':
         form = AnswerTaskForm(request.POST)
         if form.is_valid():
