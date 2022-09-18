@@ -8,7 +8,7 @@ class Task(models.Model):
     title = models.CharField(max_length=120, default='Task')
     description = models.TextField()
     likes = models.IntegerField(default=0)
-    answer_type = models.CharField(max_length=20, null=True)  # detailed_answer or short_answer
+    detail_answer = models.BooleanField(default=True, null=True)  # detailed_answer or short_answer
     reference_short_answer = models.TextField(blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
