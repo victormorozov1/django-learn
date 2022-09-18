@@ -5,7 +5,7 @@ from django.shortcuts import redirect, reverse
 from django.contrib.auth.models import User
 
 from .forms import CreateTaskWithDetailedAnswerForm, CreateTaskWithShortAnswerForm
-from .models import Task as Ttask
+from .models import TaskModel
 
 
 def index(request):
@@ -16,7 +16,7 @@ def _create_task(request, Form, template_dir, action_url, get_reference_short_an
     if request.method == 'POST':
         form = Form(request.POST)
         if form.is_valid():
-            task = Ttask.objects.create(
+            task = TaskModel.objects.create(
                 title=form.cleaned_data['title'],
                 description=form.cleaned_data['description'],
                 reference_short_answer=form.cleaned_data['reference_short_answer'] if get_reference_short_answer else '',
@@ -43,13 +43,13 @@ def create_short_task(request):
 
 
 class TasksList(ListView):
-    model = Ttask
+    model = TaskModel
     template_name = 'tasks/task_list.html'
     context_object_name = 'tasks_list'
     paginate_by = 5
 
 
 class Task(DetailView):
-    model = Ttask
+    model = TaskModel
     template_name = 'tasks/task.html'
     context_object_name = 'task'

@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Task
+from .models import TaskModel
 
 
 input = forms.TextInput(attrs={'class': 'form-control'})

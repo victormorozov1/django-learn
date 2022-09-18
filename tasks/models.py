@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 # Посмотреть про удаление!
 
 
-class Task(models.Model):
+class TaskModel(models.Model):
     title = models.CharField(max_length=120)
     description = models.TextField()
     likes = models.IntegerField(default=0)
@@ -19,4 +19,4 @@ class Task(models.Model):
 class DetailedAnswer(models.Model):
     text = models.TextField()
     responding_user = models.ForeignKey(User, on_delete=models.CASCADE)
-    task = models.ForeignKey(Task, on_delete=models.CASCADE)
+    task = models.ForeignKey(TaskModel, on_delete=models.CASCADE)
