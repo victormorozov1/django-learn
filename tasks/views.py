@@ -33,7 +33,7 @@ def create_detail_task(request):
 
 
 def create_short_task(request):
-    return _create_task(request, CreateTaskWithDetailedAnswerForm, 'tasks/create_short_task.html',
+    return _create_task(request, CreateTaskWithShortAnswerForm, 'tasks/create_short_task.html',
                         reverse('create_short_task'), get_reference_short_answer=True)
 
 
