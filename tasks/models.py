@@ -16,7 +16,7 @@ class TaskModel(models.Model):
         return f'Task {self.title}: {self.description[:20:]}'
 
 
-class DetailedAnswer(models.Model):
+class Answer(models.Model):
     text = models.TextField()
     responding_user = models.ForeignKey(User, on_delete=models.CASCADE)
     task = models.ForeignKey(TaskModel, on_delete=models.CASCADE)

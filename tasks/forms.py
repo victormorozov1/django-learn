@@ -5,7 +5,6 @@ from .models import TaskModel
 
 input = forms.TextInput(attrs={'class': 'form-control'})
 
-
 # class CreateTaskWithShortAnswerForm(forms.ModelForm):
 #     class Meta:
 #         model = Task
@@ -36,3 +35,7 @@ class CreateTaskWithShortAnswerForm(forms.Form):
 class CreateTaskWithDetailedAnswerForm(forms.Form):
     title = forms.CharField(max_length=120, widget=input)
     description = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control'}))
+
+
+class AnswerTaskForm(forms.Form):
+    text = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control'}))

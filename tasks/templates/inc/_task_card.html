@@ -4,7 +4,7 @@
         <p class="card-text">{% block description %}{{ task.description }}{% endblock %}</p>
 
         {% block read_more_button %}{% endblock %}
-        <a href="#" class="btn btn-primary" style="margin-right: 20px">Answer</a>
+        <a href="{% url 'answer_task' task.pk %}" class="btn btn-primary" style="margin-right: 20px">Answer</a>
         <a href="{% url 'user_page' task.user.pk %}" class="card-link">{{ task.user.username }}</a>
     </div>
 </div>

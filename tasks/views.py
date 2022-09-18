@@ -4,12 +4,28 @@ from django.views.generic import DetailView, ListView
 from django.shortcuts import redirect, reverse
 from django.contrib.auth.models import User
 
-from .forms import CreateTaskWithDetailedAnswerForm, CreateTaskWithShortAnswerForm
-from .models import TaskModel
+from .forms import CreateTaskWithDetailedAnswerForm, CreateTaskWithShortAnswerForm, AnswerTaskForm
+from .models import TaskModel, Answer
 
 
 def index(request):
     return HttpResponse('Main page or tasks app')
+
+
+def answer_page(request, pk):
+    if request.method == 'POST':
+        form = AnswerTaskForm(request.POST)
+        if form.is_valid():
+            a = Answer.objects.create(
+                text=form.cleaned_data['text'],
+                responding_user=request.user,
+                task=TaskModel.objects.get(pk=pk)
+            )
+            return redirect(reverse('task', kwargs={'pk': pk}))
+    else:
+        form = AnswerTaskForm()
+    return render(request, 'tasks/answer_task.html',
+                  {'form': form, 'action_url': reverse('answer_task', kwargs={'pk': pk})})
 
 
 def _create_task(request, Form, template_dir, action_url, get_reference_short_answer=False):
@@ -19,7 +35,8 @@ def _create_task(request, Form, template_dir, action_url, get_reference_short_an
             task = TaskModel.objects.create(
                 title=form.cleaned_data['title'],
                 description=form.cleaned_data['description'],
-                reference_short_answer=form.cleaned_data['reference_short_answer'] if get_reference_short_answer else '',
+                reference_short_answer=form.cleaned_data[
+                    'reference_short_answer'] if get_reference_short_answer else '',
                 user=request.user
             )
 
