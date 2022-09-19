@@ -70,3 +70,14 @@ class Task(DetailView):
     model = TaskModel
     template_name = 'tasks/task.html'
     context_object_name = 'task'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        print('search for tsh with pk =', self.kwargs['pk'])
+        task = TaskModel.objects.get(pk=self.kwargs['pk'])
+        print(task)
+        if task.user.pk == self.request.user.pk:
+            print('current user is creator of this task')
+            context['answers'] = Answer.objects.filter(task=task)
+
+        return context

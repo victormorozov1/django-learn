@@ -2,4 +2,7 @@
 
 {% block content %}
     {% include 'inc/_task_card.html' %}
+    {% for answer in answers %}
+        <p>{{ answer.text }}</p>
+    {% endfor %}
 {% endblock %}
