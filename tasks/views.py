@@ -18,11 +18,15 @@ def answer_page(request, pk):
     if request.method == 'POST':
         form = AnswerTaskForm(request.POST)
         if form.is_valid():
-            a = Answer.objects.create(
+            task = TaskModel.objects.get(pk=pk)
+            answer = Answer(
                 text=form.cleaned_data['text'],
                 responding_user=request.user,
-                task=TaskModel.objects.get(pk=pk)
+                task=task
             )
+            if not task.detail_answer:
+                answer.status = 'Approved' if answer.text == task.reference_short_answer else 'Rejected'
+            answer.save()
             return redirect(reverse('task', kwargs={'pk': pk}))
     else:
         form = AnswerTaskForm()
@@ -39,6 +43,7 @@ def _create_task(request, Form, template_dir, action_url, get_reference_short_an
                 description=form.cleaned_data['description'],
                 reference_short_answer=form.cleaned_data[
                     'reference_short_answer'] if get_reference_short_answer else '',
+                detail_answer=not get_reference_short_answer,
                 user=request.user
             )
 
