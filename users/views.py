@@ -51,6 +51,8 @@ def login_page(request):
     else:
         enter_form = EnterForm(request.POST)
         if enter_form.is_valid():
+            for i in range(100):
+                print('is valid')
             user = User.objects.get(username=enter_form.cleaned_data['name'])
             print('SUCCESS ENTER')
             login(request, user)

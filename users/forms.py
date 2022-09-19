@@ -38,7 +38,3 @@ class EnterForm(forms.Form):
             print(f'ERROR: found {len(users)} users with name {form_data["name"]}')
         if len(users) == 0 or str(hash(form_data['password'])) != users[0].password:
             self._errors["password"] = ["Wrong username or password"]
-            print(f'len(users) = {len(users)}')
-            print(f'password from form: {form_data["password"]}')
-            print(f'hashed password from form: {hash(form_data["password"])}')
-            print(f'gash from db: {users[0].password}')
