@@ -9,9 +9,26 @@
             <h6 class="card-subtitle mb-2 text-muted">Waiting for check</h6>
         {% endif %}
         <p class="card-text">{{ answer.text }}</p>
+
         {% if user.pk == task.user.pk %}
             <a href="{% url 'change_answer_status' answer.pk 'Approved' %}" class="card-link">Approve</a>
             <a href="{% url 'change_answer_status' answer.pk 'Rejected' %}" class="card-link">Reject</a>
+            {% if answer.make_public_responding_user %}
+                {% if answer.make_public_task_admin %}
+                    <a href="{% url 'change_visibility' answer.pk user.pk 0 %}" class="card-link">Make private</a>
+                {% else %}
+                    <a href="{% url 'change_visibility' answer.pk user.pk 1 %}" class="card-link">Make public</a>
+                {% endif %}
+            {% endif %}
         {% endif %}
+
+        {% if user.pk == answer.responding_user.pk %}
+            {% if answer.make_public_responding_user %}
+                <a href="{% url 'change_visibility' answer.pk user.pk 0 %}" class="card-link">Make private</a>
+            {% else %}
+                <a href="{% url 'change_visibility' answer.pk user.pk 1 %}" class="card-link">Make public</a>
+            {% endif %}
+        {% endif %}
+
     </div>
 </div>

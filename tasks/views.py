@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic import DetailView, ListView
-from django.shortcuts import redirect, reverse
+from django.shortcuts import redirect, reverse, get_object_or_404
 from django.contrib.auth.models import User
+from django.db.models import Q
 
 from .forms import CreateTaskWithDetailedAnswerForm, CreateTaskWithShortAnswerForm, AnswerTaskForm
 from .models import TaskModel, Answer
@@ -63,6 +64,19 @@ def create_short_task(request):
                         reverse('create_short_task'), get_reference_short_answer=True)
 
 
+def change_visibility(request, answer_pk, user_pk, visibility):
+    answer = get_object_or_404(Answer, pk=answer_pk)
+    user = get_object_or_404(User, pk=user_pk)
+
+    if user.pk == answer.task.user.pk:
+        answer.make_public_task_admin = bool(visibility)
+    if user.pk == answer.responding_user.pk:
+        answer.make_public_responding_user = bool(visibility)
+    answer.save()
+
+    return redirect(reverse('task', kwargs={'pk': answer.task.pk}))
+
+
 def change_answer_status(request, pk, status):
     if not request.user.is_authenticated:
         return redirect(reverse('login_page'))
@@ -93,14 +107,15 @@ class Task(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
+        task = TaskModel.objects.get(pk=self.kwargs['pk'])
         if self.request.user.is_authenticated:
-            print('search for tsh with pk =', self.kwargs['pk'])
-            task = TaskModel.objects.get(pk=self.kwargs['pk'])
-            print(task)
             if task.user.pk == self.request.user.pk:
-                print('current user is creator of this task')
                 context['answers'] = Answer.objects.filter(task=task)
             else:
-                context['answers'] = Answer.objects.filter(task=task, responding_user=self.request.user)
+                context['answers'] = Answer.objects.filter(
+                    Q(task=task) & Q(responding_user=self.request.user) | Q(make_public_responding_user=True) & Q(
+                        make_public_task_admin=True))
+        else:
+            context['answers'] = Answer.objects.filter(make_public_task_admin=True, make_public_responding_user=True)
 
         return context
