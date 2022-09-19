@@ -87,11 +87,15 @@ class Task(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        print('search for tsh with pk =', self.kwargs['pk'])
-        task = TaskModel.objects.get(pk=self.kwargs['pk'])
-        print(task)
-        if task.user.pk == self.request.user.pk:
-            print('current user is creator of this task')
-            context['answers'] = Answer.objects.filter(task=task)
+
+        if self.request.user.is_authenticated:
+            print('search for tsh with pk =', self.kwargs['pk'])
+            task = TaskModel.objects.get(pk=self.kwargs['pk'])
+            print(task)
+            if task.user.pk == self.request.user.pk:
+                print('current user is creator of this task')
+                context['answers'] = Answer.objects.filter(task=task)
+            else:
+                context['answers'] = Answer.objects.filter(task=task, responding_user=self.request.user)
 
         return context
