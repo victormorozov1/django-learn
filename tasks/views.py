@@ -63,7 +63,7 @@ class TasksList(ListView):
     template_name = 'tasks/task_list.html'
     context_object_name = 'tasks_list'
     paginate_by = 5
-    # ordering = 'date'
+    ordering = '-created_at'
 
 
 class Task(DetailView):
