@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 
 class Profile(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)  # change on_delete
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     about = models.TextField()
     hobby = models.CharField(max_length=120)
 
@@ -21,5 +21,3 @@ class Profile(models.Model):
 #
 #     def __str__(self):
 #         return f'User {self.name}'
-
-

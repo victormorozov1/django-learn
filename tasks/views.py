@@ -36,6 +36,8 @@ def answer_page(request, pk):
 
 
 def _create_task(request, Form, template_dir, action_url, get_reference_short_answer=False):
+    if not request.user.is_authenticated:
+        return redirect(reverse('login_page'))
     if request.method == 'POST':
         form = Form(request.POST)
         if form.is_valid():
