@@ -1,6 +1,6 @@
 <div class="card" style="width: 18rem;">
     <div class="card-body status-background">
-        <h5 class="card-title">Answer by {{ answer.user.username }}</h5>
+        <h5 class="card-title">Answer by {{ answer.responding_user.username }}</h5>
         {% if answer.status == 'Approved' %}
             <h6 class="card-subtitle mb-2" style="color: green">Approved</h6>
         {% elif answer.status == 'Rejected' %}
