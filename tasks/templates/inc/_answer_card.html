@@ -3,8 +3,8 @@
         <h5 class="card-title">Answer by {{ answer.user.username }}</h5>
         <p class="card-text">{{ answer.text }}</p>
         {% if user.pk == task.user.pk %}
-            <a href="#" class="card-link">Approve</a>
-            <a href="#" class="card-link">Reject</a>
+            <a href="{% url 'change_answer_status' answer.pk 'Approved' %}" class="card-link">Approve</a>
+            <a href="{% url 'change_answer_status' answer.pk 'Rejected' %}" class="card-link">Reject</a>
         {% endif %}
     </div>
 </div>

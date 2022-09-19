@@ -8,4 +8,5 @@ urlpatterns = [
     path('create-detail-task/', create_detail_task, name='create_detail_task'),
     path('create-short-task/', create_short_task, name='create_short_task'),
     path('answer-task<int:pk>/', answer_page, name='answer_task'),
+    path('answer<int:pk>/set-status-<str:status>', change_answer_status, name='change_answer_status'),
 ]

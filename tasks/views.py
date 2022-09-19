@@ -58,6 +58,20 @@ def create_short_task(request):
                         reverse('create_short_task'), get_reference_short_answer=True)
 
 
+def change_answer_status(request, pk, status):
+    if not request.user.is_authenticated:
+        return redirect(reverse('login_page'))
+
+    answer = Answer.objects.get(pk=pk)
+    if request.user == answer.task.user:
+        answer.status = status
+        answer.save()
+    else:
+        print('Недостаточно прав')  # по хорошему нужно вывести это сообщение в html, но мне лень
+
+    return redirect(reverse('task', kwargs={'pk': answer.task.pk}))
+
+
 class TasksList(ListView):
     model = TaskModel
     template_name = 'tasks/task_list.html'

@@ -19,6 +19,6 @@ class TaskModel(models.Model):
 
 class Answer(models.Model):
     text = models.TextField()
-    status = models.CharField(max_length=20, null=True)  # Approved / Rejected / waiting for check
+    status = models.CharField(max_length=20, null=True)  # Approved / Rejected / Waiting for check
     responding_user = models.ForeignKey(User, on_delete=models.CASCADE)
     task = models.ForeignKey(TaskModel, on_delete=models.CASCADE)
