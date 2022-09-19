@@ -115,8 +115,8 @@ class Task(DetailView):
                 context['answers'] = Answer.objects.filter(task=task)
             else:
                 context['answers'] = Answer.objects.filter(
-                    Q(task=task) & Q(responding_user=self.request.user) | Q(make_public_responding_user=True) & Q(
-                        make_public_task_admin=True))
+                    Q(task=task) & (Q(responding_user=self.request.user) | Q(make_public_responding_user=True) & Q(
+                        make_public_task_admin=True)))
         else:
             context['answers'] = Answer.objects.filter(make_public_task_admin=True, make_public_responding_user=True)
 
