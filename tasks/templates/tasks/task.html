@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% include 'inc/_task_card.html' %}
+    {% if answers|length > 0 %}
+        <h3>Answers:</h3>
+    {% else %}
+        <h3>No answers(</h3>
+    {% endif %}
+    {% for answer in answers %}
+        {% include 'inc/_answer_card.html' %}
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,25 @@
+<div class="card" style="width: 100%; margin: 5px">
+    <div class="card-body status-background">
+        <h5 class="card-title">Answer by {{ answer.responding_user.username }}</h5>
+        {% if answer.status == 'Approved' %}
+            <h6 class="card-subtitle mb-2" style="color: green">Approved</h6>
+        {% elif answer.status == 'Rejected' %}
+            <h6 class="card-subtitle mb-2" style="color: red">Rejected</h6>
+        {% else %}
+            <h6 class="card-subtitle mb-2 text-muted">Waiting for check</h6>
+        {% endif %}
+        <p class="card-text">{{ answer.text }}</p>
+
+        {% if user.pk == task.user.pk %}
+            <a href="{% url 'change_answer_status' answer.pk 'Approved' %}" class="card-link">Approve</a>
+            <a href="{% url 'change_answer_status' answer.pk 'Rejected' %}" class="card-link">Reject</a>
+        {% endif %}
+
+        {% if answer.responding_user.pk == user.pk and answer.make_public_responding_user or task.user.pk == user.pk and answer.make_public_task_admin %}
+            <a href="{% url 'change_visibility' answer.pk user.pk 0 %}" class="card-link">Make private</a>
+        {% elif answer.responding_user.pk == user.pk and not answer.make_public_responding_user or task.user.pk == user.pk and answer.make_public_responding_user and not answer.make_public_task_admin %}
+            <a href="{% url 'change_visibility' answer.pk user.pk 1 %}" class="card-link">Make public</a>
+        {% endif %}
+
+    </div>
+</div>

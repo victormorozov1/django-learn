@@ -1,0 +1,9 @@
+{% extends 'inc/_task_card.html' %}
+
+{% block description %}
+    {{ task.description|truncatewords:50 }}
+{% endblock %}
+
+{% block read_more_button %}
+    <a href="{% url 'task' task.pk %}" class="btn btn-primary">Read more</a>
+{% endblock %}

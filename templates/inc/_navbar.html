@@ -3,7 +3,9 @@
         <ul class="navbar-nav mr-auto">
             <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
             <li class="nav-item"><a class="nav-link" href="{% url 'users' %}">Users</a></li>
-            <li class="nav-item"><a class="nav-link" href="{% url 'register_page' %}">Register</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'tasks_list' %}">Tasks</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'create_detail_task' %}">Create detail task</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'create_short_task' %}">Create short task</a></li>
             {% if request.user.is_authenticated %}
                 <li class="nav-item"><a class="nav-link" href="{% url 'logout_page' %}">Logout</a></li>
                 <b>
@@ -12,6 +14,7 @@
                     </li>
                 </b>
             {% else %}
+                <li class="nav-item"><a class="nav-link" href="{% url 'register_page' %}">Register</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'login_page' %}">Enter</a></li>
             {% endif %}
 
