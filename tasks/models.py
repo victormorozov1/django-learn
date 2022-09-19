@@ -20,5 +20,7 @@ class TaskModel(models.Model):
 class Answer(models.Model):
     text = models.TextField()
     status = models.CharField(max_length=20, null=True)  # Approved / Rejected / Waiting for check
+    make_public_responding_user = models.BooleanField(default=False, null=True)
+    make_public_task_admin = models.BooleanField(default=False, null=True)
     responding_user = models.ForeignKey(User, on_delete=models.CASCADE)
     task = models.ForeignKey(TaskModel, on_delete=models.CASCADE)
