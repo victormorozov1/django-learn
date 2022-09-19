@@ -1,6 +1,13 @@
 <div class="card" style="width: 18rem;">
-    <div class="card-body">
+    <div class="card-body status-background">
         <h5 class="card-title">Answer by {{ answer.user.username }}</h5>
+        {% if answer.status == 'Approved' %}
+            <h6 class="card-subtitle mb-2" style="color: green">Approved</h6>
+        {% elif answer.status == 'Rejected' %}
+            <h6 class="card-subtitle mb-2" style="color: red">Rejected</h6>
+        {% else %}
+            <h6 class="card-subtitle mb-2 text-muted">Waiting for check</h6>
+        {% endif %}
         <p class="card-text">{{ answer.text }}</p>
         {% if user.pk == task.user.pk %}
             <a href="{% url 'change_answer_status' answer.pk 'Approved' %}" class="card-link">Approve</a>
