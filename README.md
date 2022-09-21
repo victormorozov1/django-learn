@@ -7,7 +7,7 @@ This is my python-django learn project
 
 Вопросы бывают 2х типов, с кратким и развернутым ответом
 
-To run project:
+## To run project:
 ```
 pip install -r requirements.txt
 python manage.py runserver
